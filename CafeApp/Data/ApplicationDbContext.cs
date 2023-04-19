@@ -12,5 +12,6 @@ namespace CafeApp.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Menu> Menus { get; set; }
     }
 }
