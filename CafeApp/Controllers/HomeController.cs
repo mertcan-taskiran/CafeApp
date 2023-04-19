@@ -18,7 +18,37 @@ namespace CafeApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+		public IActionResult Contact()
+		{
+			return View();
+		}
+
+		public IActionResult Blog()
+		{
+			return View();
+		}
+
+		public IActionResult About()
+		{
+			return View();
+		}
+
+		public IActionResult Galeri()
+		{
+			return View();
+		}
+
+		public IActionResult Rezervasyon()
+		{
+			return View();
+		}
+
+		public IActionResult Menu()
+		{
+			return View();
+		}
+
+		public IActionResult Privacy()
         {
             return View();
         }
