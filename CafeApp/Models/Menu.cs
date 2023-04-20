@@ -14,7 +14,7 @@ namespace CafeApp.Models
         [Required]
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public bool Ozel { get; set; }
 
