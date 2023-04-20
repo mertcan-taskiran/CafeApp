@@ -14,10 +14,12 @@ namespace CafeApp.Areas.Admin.Controllers
     public class MenuController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _he;
 
-        public MenuController(ApplicationDbContext context)
+        public MenuController(ApplicationDbContext context, IWebHostEnvironment he)
         {
             _context = context;
+            _he = he;
         }
 
         // GET: Admin/Menu
@@ -56,16 +58,40 @@ namespace CafeApp.Areas.Admin.Controllers
         // POST: Admin/Menu/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Image,Ozel,Price,CategoryId")] Menu menu)
+        public async Task<IActionResult> Create(Menu menu)
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(_he.WebRootPath, @"Site\menu");
+                    var ext = Path.GetExtension(files[0].FileName);
+
+                    if (menu.Image != null)
+                    {
+                        var imagePath = Path.Combine(_he.WebRootPath, menu.Image.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                    }
+
+                    using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + ext), FileMode.Create))
+                    {
+                        files[0].CopyTo(filesStreams);
+                    }
+
+                    menu.Image = @"\Site\menu\" + fileName + ext;
+                }
+
                 _context.Add(menu);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", menu.CategoryId);
             return View(menu);
         }
 
