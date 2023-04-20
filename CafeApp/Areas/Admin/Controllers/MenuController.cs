@@ -64,6 +64,7 @@ namespace CafeApp.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", menu.CategoryId);
             return View(menu);
         }
@@ -86,8 +87,6 @@ namespace CafeApp.Areas.Admin.Controllers
         }
 
         // POST: Admin/Menu/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image,Ozel,Price,CategoryId")] Menu menu)
