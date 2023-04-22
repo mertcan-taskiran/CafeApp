@@ -23,7 +23,14 @@ namespace CafeApp.Areas.Customer.Controllers
             return View(menu);
         }
 
-        public IActionResult Contact()
+		public IActionResult CategoryDetails(int? id)
+		{
+            var menu = _db.Menus.Where(i => i.CategoryId == id).ToList();
+            ViewBag.KategoriId = id;
+			return View(menu);
+		}
+
+		public IActionResult Contact()
         {
             return View();
         }
@@ -50,7 +57,8 @@ namespace CafeApp.Areas.Customer.Controllers
 
         public IActionResult Menu()
         {
-            return View();
+            var menu = _db.Menus.ToList();
+            return View(menu);
         }
 
         public IActionResult Privacy()
