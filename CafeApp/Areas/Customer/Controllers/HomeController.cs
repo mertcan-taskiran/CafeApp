@@ -1,6 +1,7 @@
 ﻿using CafeApp.Data;
 using CafeApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace CafeApp.Areas.Customer.Controllers
@@ -50,9 +51,24 @@ namespace CafeApp.Areas.Customer.Controllers
             return View();
         }
 
+        // GET: Admin/Rezervasyon/Create
         public IActionResult Rezervasyon()
         {
             return View();
+        }
+
+        // POST: Admin/Rezervasyon/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Rezervasyon([Bind("Id,Name,Email,TelefonNo,Sayi,Saat,Tarih")] Rezervasyon rezervasyon)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(rezervasyon);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(rezervasyon);
         }
 
         public IActionResult Menu()

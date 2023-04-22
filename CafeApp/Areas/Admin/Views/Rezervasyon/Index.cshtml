@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CafeApp.Models.Rezervasyon>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-3">
+                <li class="breadcrumb-item"><a class="link-dark" href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Reservations</li>
+            </ol>
+        </nav>
+
+        <h3>Admin Reservations</h3>
+        <hr />
+
+        <table class="table table-hover table-bordered table-striped table-sm" id="myTable">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th class="text-center">
+                        Phone Number
+                    </th>
+                    <th class="text-center" style="width:80px;">
+                        Number of People
+                    </th>
+                    <th class="text-center" style="width:40px;">
+                        Time
+                    </th>
+                    <th class="text-center" style="width:70px;">
+                        Date
+                    </th>
+                    <th class="text-center" style="width:60px;"><i class="fa-solid fa-gear"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr class="text-center">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TelefonNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sayi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Saat)
+                        </td>
+                        <td>
+                            @item.Tarih.ToShortDateString()
+                        </td>
+                        <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
