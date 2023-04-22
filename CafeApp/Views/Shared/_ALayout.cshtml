@@ -3,33 +3,21 @@
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="icon" type="image/png" href="/Site/images/icons/favicon.png" />
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/fonts/themify/themify-icons.css">
-	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Site/vendor/bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" type="text/css" href="/Site/fonts/font-awesome-4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" type="text/css" href="/Site/fonts/themify/themify-icons.css"> 
 	<link rel="stylesheet" type="text/css" href="/Site/vendor/animate/animate.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/vendor/css-hamburgers/hamburgers.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/vendor/animsition/css/animsition.min.css">
-	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Site/vendor/css-hamburgers/hamburgers.min.css"> 
+	<link rel="stylesheet" type="text/css" href="/Site/vendor/animsition/css/animsition.min.css"> 
 	<link rel="stylesheet" type="text/css" href="/Site/vendor/select2/select2.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/vendor/daterangepicker/daterangepicker.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Site/vendor/slick/slick.css">
-	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Site/vendor/daterangepicker/daterangepicker.css"> 
+	<link rel="stylesheet" type="text/css" href="/Site/vendor/slick/slick.css"> 
 	<link rel="stylesheet" type="text/css" href="/Site/vendor/lightbox2/css/lightbox.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/Site/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/Site/css/main.css">
-	<!--===============================================================================================-->
+	 
 </head>
 <body class="animsition">
 
@@ -45,34 +33,25 @@
 	<!-- Footer -->
 	<partial name="_Footer" />
 
-	<!--===============================================================================================-->
-	<script type="text/javascript" src="/Site/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script type="text/javascript" src="/Site/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
+	<script type="text/javascript" src="/Site/vendor/jquery/jquery-3.2.1.min.js"></script>	 
+	<script type="text/javascript" src="/Site/vendor/animsition/js/animsition.min.js"></script> 
 	<script type="text/javascript" src="/Site/vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="/Site/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script type="text/javascript" src="/Site/vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
+	<script type="text/javascript" src="/Site/vendor/bootstrap/js/bootstrap.min.js"></script> 
+	<script type="text/javascript" src="/Site/vendor/select2/select2.min.js"></script> 
 	<script type="text/javascript" src="/Site/vendor/daterangepicker/moment.min.js"></script>
 	<script type="text/javascript" src="/Site/vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
 	<script type="text/javascript" src="/Site/vendor/slick/slick.min.js"></script>
 	<script type="text/javascript" src="/Site/js/slick-custom.js"></script>
-	<!--===============================================================================================-->
 	<script type="text/javascript" src="/Site/vendor/parallax100/parallax100.js"></script>
 	<script type="text/javascript">
 		$('.parallax100').parallax100();
-	</script>
-	<!--===============================================================================================-->
-	<script type="text/javascript" src="/Site/vendor/countdowntime/countdowntime.js"></script>
-	<!--===============================================================================================-->
-	<script type="text/javascript" src="/Site/vendor/lightbox2/js/lightbox.min.js"></script>
-	<!--===============================================================================================-->
+	</script> 
+	<script type="text/javascript" src="/Site/vendor/countdowntime/countdowntime.js"></script>	 
+	<script type="text/javascript" src="/Site/vendor/lightbox2/js/lightbox.min.js"></script> 
 	<script src="/Site/js/main.js"></script>
-
 	@await RenderSectionAsync("Scripts", required: false)
+
+	@await Component.InvokeAsync("NToastNotify")
 
 </body>
 </html>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CafeApp.Data;
 using CafeApp.Models;
+using NToastNotify;
 
 namespace CafeApp.Areas.Admin.Controllers
 {
@@ -15,11 +16,13 @@ namespace CafeApp.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _he;
+        private readonly IToastNotification _toast;
 
-        public MenuController(ApplicationDbContext context, IWebHostEnvironment he)
+        public MenuController(ApplicationDbContext context, IWebHostEnvironment he, IToastNotification toast)
         {
             _context = context;
             _he = he;
+            _toast = toast;
         }
 
         // GET: Admin/Menu
@@ -89,6 +92,7 @@ namespace CafeApp.Areas.Admin.Controllers
 
                 _context.Add(menu);
                 await _context.SaveChangesAsync();
+                _toast.AddSuccessToastMessage("Added Successfully");
                 return RedirectToAction(nameof(Index));
             }
 
@@ -147,7 +151,7 @@ namespace CafeApp.Areas.Admin.Controllers
             
                 _context.Update(menu);
                 await _context.SaveChangesAsync();
-                              
+                _toast.AddSuccessToastMessage("Successfully Updated");
                 return RedirectToAction(nameof(Index));
             }
 
@@ -189,6 +193,7 @@ namespace CafeApp.Areas.Admin.Controllers
 
             _context.Menus.Remove(menu);     
             await _context.SaveChangesAsync();
+            _toast.AddSuccessToastMessage("Successfully Deleted");
             return RedirectToAction(nameof(Index));
         }
 

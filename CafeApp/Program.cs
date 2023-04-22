@@ -1,6 +1,7 @@
 using CafeApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 namespace CafeApp
 {
@@ -15,6 +16,13 @@ namespace CafeApp
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                CloseButton = true,
+                PositionClass = ToastPositions.BottomRight,
+                PreventDuplicates = true
+            });
 
             builder.Services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
