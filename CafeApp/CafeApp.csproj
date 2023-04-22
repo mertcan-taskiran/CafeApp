@@ -4114,6 +4114,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Site\menu\" />
+    <Folder Include="wwwroot\Site\gallery\" />
   </ItemGroup>
 
 </Project>

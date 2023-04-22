@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CafeApp.Models.Galeri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-3">
+                <li class="breadcrumb-item"><a class="link-dark" href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Gallery</li>
+            </ol>
+        </nav>
+
+        <h3>Admin Gallery</h3>
+        <hr />
+
+        <p>
+            <a asp-action="Create" class="btn btn-dark"><i class="fa-solid fa-image"></i> Create Image</a>
+        </p>
+
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td style="width:200px">
+                            @if (item.Image == null)
+                            {
+                                <div class="img-thumbnail">
+                                    <img src="~/Site/images/no-image.jpg" width="200" height="160" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="img-thumbnail">
+                                    <img src="@item.Image" width="200" height="160" />
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
