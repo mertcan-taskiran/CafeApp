@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CafeApp.Data;
 using CafeApp.Models;
+using NToastNotify;
 
 namespace CafeApp.Areas.Admin.Controllers
 {
@@ -14,10 +15,12 @@ namespace CafeApp.Areas.Admin.Controllers
     public class AboutController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toast;
 
-        public AboutController(ApplicationDbContext context)
+        public AboutController(ApplicationDbContext context, IToastNotification toast)
         {
             _context = context;
+            _toast = toast;
         }
 
         // GET: Admin/About
@@ -63,6 +66,7 @@ namespace CafeApp.Areas.Admin.Controllers
             {
                 _context.Add(about);
                 await _context.SaveChangesAsync();
+                _toast.AddSuccessToastMessage("Added Successfully");
                 return RedirectToAction(nameof(Index));
             }
             return View(about);
@@ -114,6 +118,7 @@ namespace CafeApp.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                _toast.AddSuccessToastMessage("Successfully Updated");
                 return RedirectToAction(nameof(Index));
             }
             return View(about);
@@ -153,6 +158,7 @@ namespace CafeApp.Areas.Admin.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _toast.AddSuccessToastMessage("Successfully Deleted");
             return RedirectToAction(nameof(Index));
         }
 

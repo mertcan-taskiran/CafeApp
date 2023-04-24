@@ -13,12 +13,14 @@ namespace CafeApp.Areas.Customer.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
         private readonly IToastNotification _toast;
+        private readonly IWebHostEnvironment _he;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, IToastNotification toast)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, IToastNotification toast, IWebHostEnvironment he)
         {
             _logger = logger;
             _db = db;
             _toast = toast;
+            _he = he;
         }
 
         public IActionResult Index()
@@ -39,9 +41,52 @@ namespace CafeApp.Areas.Customer.Controllers
             return View();
         }
 
+        // GET: Admin/Blog/Create
         public IActionResult Blog()
         {
             return View();
+        }
+
+        // POST: Admin/Blog/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Blog(Blog blog)
+        {
+            if (ModelState.IsValid)
+            {
+                blog.Tarih = DateTime.Now;
+
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(_he.WebRootPath, @"Site\blog");
+                    var ext = Path.GetExtension(files[0].FileName);
+
+                    if (blog.Image != null)
+                    {
+                        var imagePath = Path.Combine(_he.WebRootPath, blog.Image.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                    }
+
+                    using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + ext), FileMode.Create))
+                    {
+                        files[0].CopyTo(filesStreams);
+                    }
+
+                    blog.Image = @"\Site\blog\" + fileName + ext;
+                }
+
+                _db.Add(blog);
+                await _db.SaveChangesAsync();
+                _toast.AddSuccessToastMessage("Your comment has been successfully submitted.");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(blog);
         }
 
         public IActionResult About()

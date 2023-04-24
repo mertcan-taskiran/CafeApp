@@ -4115,6 +4115,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Site\menu\" />
     <Folder Include="wwwroot\Site\gallery\" />
+    <Folder Include="wwwroot\Site\blog\" />
   </ItemGroup>
 
 </Project>
