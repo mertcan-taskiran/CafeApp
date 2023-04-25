@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CafeApp.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-3">
+                <li class="breadcrumb-item"><a class="link-dark" href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Contacts</li>
+            </ol>
+        </nav>
+
+        <h3>Admin Contacts</h3>
+        <hr />
+
+        <table class="table table-hover table-bordered table-striped table-sm" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th class="text-center" style="width:60px;"><i class="fa-solid fa-gear"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mesaj)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tarih)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

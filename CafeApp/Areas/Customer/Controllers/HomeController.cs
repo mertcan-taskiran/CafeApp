@@ -36,9 +36,26 @@ namespace CafeApp.Areas.Customer.Controllers
 			return View(menu);
 		}
 
-		public IActionResult Contact()
+        // GET: Admin/Contact/Create
+        public IActionResult Contact()
         {
             return View();
+        }
+
+        // POST: Admin/Contact/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Contact([Bind("Id,Name,Email,Telefon,Mesaj,Tarih")] Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                contact.Tarih = DateTime.Now;
+                _db.Add(contact);
+                await _db.SaveChangesAsync();
+                _toast.AddSuccessToastMessage("Your message has been successfully submitted.");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contact);
         }
 
         // GET: Admin/Blog/Create
