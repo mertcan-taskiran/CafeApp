@@ -8,35 +8,61 @@
 				<div class="wrap_menu p-l-45 p-l-0-xl">
 					<nav class="menu">
 						<ul class="main_menu">
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Index">Cafe Restaurant</a>
-							</li>
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-							</li>
+							@if (User.Identity.IsAuthenticated)
+							{
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Index">Cafe Restaurant</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Menu">Menu</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Rezervasyon">Reservation</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Galeri">Gallery</a>
+								</li>
+								<li>
+									<a asp-area="Admin" asp-controller="Menu" asp-action="Index" target="_blank">Admin Panel</a>
+								</li>
+								<li class="nav-item">
+									<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+									</form>
+								</li>
+							}
+							else
+							{
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Index">Cafe Restaurant</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Menu">Menu</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Rezervasyon">Reservation</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Galeri">Gallery</a>
+								</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="About">About</a>
+								</li>
 
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Menu">Menu</a>
-							</li>
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Rezervasyon">Reservation</a>
-							</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Blog">Blog</a>
+								</li>
 
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Galeri">Gallery</a>
-							</li>
-
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="About">About</a>
-							</li>
-
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Blog">Blog</a>
-							</li>
-
-							<li>
-								<a asp-area="Customer" asp-controller="Home" asp-action="Contact">Contact</a>
-							</li>
+								<li>
+									<a asp-area="Customer" asp-controller="Home" asp-action="Contact">Contact</a>
+								</li>
+							}							
 						</ul>
 					</nav>
 				</div>

@@ -34,6 +34,21 @@
 				Reservation
 			</a>
 		</li>
+		@if (User.Identity.IsAuthenticated)
+		{
+			<li class="t-center m-b-33 mt-3">
+				<a asp-area="Admin" asp-controller="Menu" asp-action="Index" target="_blank" class="txt19">Admin Panel</a>
+			</li>
+			<li class="t-center">
+				<form class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+					<button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+				</form>
+			</li>
+		}
+		else
+		{
+			
+		}
 	</ul>
 
 	<!-- - -->

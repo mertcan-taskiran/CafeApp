@@ -9,10 +9,12 @@ using CafeApp.Data;
 using CafeApp.Models;
 using NToastNotify;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CafeApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;

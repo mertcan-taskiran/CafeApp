@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CafeApp.Data;
 using CafeApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CafeApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class RezervasyonController : Controller
     {
         private readonly ApplicationDbContext _context;
